@@ -2,6 +2,7 @@ from django.http import Http404
 # from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from utils.decoders import translate2Human, translate2Morse
@@ -15,6 +16,7 @@ class ToTextViewSet(viewsets.ViewSet):
     API ViewSet that supports retrieving conversion from Morse to text
     """
     serializer_class = TextSerializer
+    permission_classes = (IsAuthenticated,)
 
     def create(self, request):
         """
@@ -44,6 +46,8 @@ class ToMorseViewSet(viewsets.ViewSet):
     API ViewSet that supports retrieving conversion from text to Morse
     """
     serializer_class = TextSerializer
+    permission_classes = (IsAuthenticated,)
+
 
     def create(self, request):
         """
